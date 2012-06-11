@@ -1,0 +1,18 @@
+ARDUINO-OATH-TOKEN
+==================
+
+This is a basic Open-Source implementation of a TOTP (compliant with OATH*) code in Arduino.
+Basicaly it generates 6 digits OTP based in a EPOCH time stored in a variable called birthTime
+There is no time drift. The OTP is updated each 30 seconds.
+
+For HMAC-SHA1 hash this implementation uses the code from Cathedrow / Cryptosuite (https://github.com/Cathedrow/Cryptosuite). 
+However a small change was added to sha1.h and sha1.c: The method size_t Sha1Class::writebytes(const uint8_t* data, int length)
+
+For debug purposes the main important functions are printed to serial output.
+
+A picture of a working prototype can be found at: 
+https://github.com/damico/ARDUINO-OATH-TOKEN/blob/master/arduino-oath-token-prototype.png
+
+*http://www.openauthentication.org/
+
+author: Jose (Ricardo de Oliveira) Damico (jd dot comment at gmail dot com)
