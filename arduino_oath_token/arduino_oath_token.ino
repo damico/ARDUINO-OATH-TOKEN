@@ -1,4 +1,7 @@
+#include <LiquidCrystal.h>
 #include "sha1.h"
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 void printHash(uint8_t* hash) {
   int i;
@@ -6,7 +9,7 @@ void printHash(uint8_t* hash) {
   Serial.println();
 }
 
-uint8_t hmacKey1[]={   0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21, 0xde, 0xad, 0xbe, 0xef, 0x6f, 0x21, 0xde, 0xad, 0xbe, 0xef };
+uint8_t hmacKey1[]={ 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21, 0xde, 0xad, 0xbe, 0xef, 0x6f, 0x21, 0xde, 0xad, 0xbe, 0xef };
 
 long birthTime = 1339345870;
 long intern = 0;
@@ -14,7 +17,12 @@ long oldOtp = 0;
 
 void setup() {
   Serial.begin(9600);
+  lcd.begin(16, 2);
+  lcd.setCursor(0, 0);
+  lcd.print("OTP: ");
 }
+
+int wait = 0;
 
 void loop() {
   
@@ -39,16 +47,6 @@ void loop() {
    Sha1.writebytes(byteArray, 8);
    hash = Sha1.resultHmac();
   
-   int hash2[20];
-   int k;
-  
-  //for(k=0; k<20; k++){
-    
-   // hash2[k] = (int)hash[k];
-
-    
-  //}
-  
    int  offset = hash[20 - 1] & 0xF; 
    long truncatedHash = 0;
    int j;
@@ -60,13 +58,27 @@ void loop() {
    truncatedHash &= 0x7FFFFFFF;
    truncatedHash %= 1000000;
   
+  
    if(truncatedHash != oldOtp){
     oldOtp = truncatedHash;
+    wait = 0;
     Serial.println(truncatedHash);
-   }
+    lcd.setCursor(5, 0);
+    lcd.print(truncatedHash);
+    lcd.setCursor(0, 1);
+    lcd.print("                ");
+   }else wait++;
+   
+   if(wait % 2 == 0){
+   
+     lcd.setCursor(wait/2, 1);
+     lcd.print("*");
+   
+   } 
    
    delay(1000);
-   intern++;     
+   intern++;
+   
   }
   
   
