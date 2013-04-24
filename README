@@ -20,8 +20,18 @@ For compilation purposes, make sure that you have the following directory struct
 ---> ARDUINO-OATH-TOKEN/
 ---> ---> arduino_oath_token/
 ---> ---> ---> arduino_oath_token.ino
----> --->Sha/
+---> ---> Sha/
 ---> ---> ---> sha1.cpp  
----> ---> ---> sha1.h
+---> ---> ---> sha1.h 
+
+Also, check you libraries directory inside arduino installation folder. It must contain the Sha folder inside it (the arduino installation folder may have different locations and versions, depending of OS).
+
+---> arduino-1.0.1/
+---> ---> libraries/
+---> ---> ---> Sha
+---> ---> ---> ---> sha1.cpp  
+---> ---> ---> ---> sha1.h 
+
+The Sha library folder can be found at https://github.com/Cathedrow/Cryptosuite as mentioned before but change the sha1.cpp and sha1.h by the ones found at https://github.com/damico/ARDUINO-OATH-TOKEN/tree/master/Sha repository.
 
 author: Jose (Ricardo de Oliveira) Damico (jd dot comment at gmail dot com)
