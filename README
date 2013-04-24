@@ -15,4 +15,13 @@ https://github.com/damico/ARDUINO-OATH-TOKEN/blob/master/arduino-oath-token-prot
 
 *http://www.openauthentication.org/
 
+For compilation purposes, make sure that you have the following directory structure:
+
+---> ARDUINO-OATH-TOKEN/
+---> ---> arduino_oath_token/
+---> ---> ---> arduino_oath_token.ino
+---> --->Sha/
+---> ---> ---> sha1.cpp  
+---> ---> ---> sha1.h
+
 author: Jose (Ricardo de Oliveira) Damico (jd dot comment at gmail dot com)
